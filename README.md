@@ -115,14 +115,118 @@ print(features)
 # OUTPUT
 <img width="1198" height="401" alt="image" src="https://github.com/user-attachments/assets/54062299-923e-48fa-98f8-d81d82c3d426" />
 
+# CODING
+y=new_data['SalStat'].values
+print(y)
 
+# OUTPUT
+<img width="179" height="38" alt="image" src="https://github.com/user-attachments/assets/3e2d6eee-a8ff-4507-917f-295be27fe10f" />
 
+# CODING
+x=new_data[features].values
+print(x)
 
+# OUTPUT
+<img width="401" height="157" alt="image" src="https://github.com/user-attachments/assets/3e839932-12f5-4d45-8d2e-6a66c02924cd" />
 
+# CODING
 
+train_x,test_x,train_y,test_y=train_test_split(x,y,test_size=0.3,random_state=0)
 
+KNN_classifier=KNeighborsClassifier(n_neighbors = 5)
 
+KNN_classifier.fit(train_x,train_y)
 
+# OUTPUT
+<img width="216" height="29" alt="image" src="https://github.com/user-attachments/assets/8d8ad47a-9598-4293-b567-c3bc2ea8bcef" />
+
+# CODING
+prediction=KNN_classifier.predict(test_x)
+
+confusionMatrix=confusion_matrix(test_y, prediction)
+print(confusionMatrix)
+
+# OUTPUT
+<img width="135" height="52" alt="image" src="https://github.com/user-attachments/assets/d6e9fd0f-fcae-4fab-a6bf-8da5d5bcf7d6" />
+
+# CODING
+accuracy_score=accuracy_score(test_y,prediction)
+print(accuracy_score)
+
+# OUTPUT
+<img width="192" height="29" alt="image" src="https://github.com/user-attachments/assets/dea1e752-d3f9-40b4-b7e1-b76232bc46df" />
+
+# CODING
+print("Misclassified Samples : %d" % (test_y !=prediction).sum())
+
+# OUTPUT
+<img width="283" height="34" alt="image" src="https://github.com/user-attachments/assets/62d53022-0a62-4fa1-b33a-73833c554ad0" />
+
+# CODING
+data.shape
+
+# OUTPUT
+<img width="119" height="34" alt="image" src="https://github.com/user-attachments/assets/de5796c8-b7cd-4a90-b9ed-9af9a66daf51" />
+
+# CODING
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
+data={
+    'Feature1': [1,2,3,4,5],
+    'Feature2': ['A','B','C','A','B'],
+    'Feature3': [0,1,1,0,1],
+    'Target'  : [0,1,1,0,1]
+}
+
+df=pd.DataFrame(data)
+x=df[['Feature1','Feature3']]
+y=df[['Target']]
+
+selector=SelectKBest(score_func=mutual_info_classif,k=1)
+x_new=selector.fit_transform(x,y)
+
+selected_feature_indices=selector.get_support(indices=True)
+
+selected_features=x.columns[selected_feature_indices]
+print("Selected Features:")
+print(selected_features)
+
+# OUTPUT
+<img width="335" height="50" alt="image" src="https://github.com/user-attachments/assets/8d4a2f72-8158-4349-846d-c6e6994fc289" />
+
+# CODING
+import pandas as pd
+import numpy as np
+from scipy.stats import chi2_contingency
+
+import seaborn as sns
+tips=sns.load_dataset('tips')
+tips.head()
+
+# OUTPUT
+<img width="411" height="191" alt="image" src="https://github.com/user-attachments/assets/5fee2ecd-4808-4dfb-bba7-f778ce32c01f" />
+
+# CODING
+tips.time.unique()
+
+# OUTPUT
+<img width="408" height="52" alt="image" src="https://github.com/user-attachments/assets/c112e256-e81a-448f-a628-c05333e8757b" />
+
+# CODING
+contingency_table=pd.crosstab(tips['sex'],tips['time'])
+print(contingency_table)
+
+# OUTPUT
+<img width="210" height="86" alt="image" src="https://github.com/user-attachments/assets/9ad249b5-18af-4bb4-91cd-c20ca12a53dc" />
+
+# CODING
+chi2,p,_,_=chi2_contingency(contingency_table)
+print(f"Chi-Square Statistics: {chi2}")
+print(f"P-Value: {p}")
+
+# OUTPUT
+<img width="397" height="59" alt="image" src="https://github.com/user-attachments/assets/0a0d481f-6a45-4c69-9ecb-9cba4bb35aa3" />
 
 # RESULT:
        # INCLUDE YOUR RESULT HERE
+Thus the program to read the given data and perform Feature Scaling and Feature Selection process and save the data to a file is been executed.
